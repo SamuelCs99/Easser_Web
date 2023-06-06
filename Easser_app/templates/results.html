@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h2>{{ title }}</h2>
+    {% if results %}
+        <ul>
+        {% for result in results %}
+            <li>
+                <p>Capitulo: {{ result.strong_contents }}</p>
+                <ul>
+                {% for page_info in result.hrefs %}
+                    {% if page_info %}                        
+                        <ul>
+                        {% for info in page_info %}
+                            {% if info == 'Error al obtener informacion del capitulo' %}
+                                <li>{{ info }}</li>
+                            {% else %}
+                                <li>
+                                    <p>Idioma: {{ info.idioma }}</p>
+                                    <p>URL: <a href="{{ info.link }}" target="_blank">{{ info.link }}</a></p>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>                        
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results to display.</p>
+    {% endif %}
+</body>
+</html>
