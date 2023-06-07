@@ -10865,7 +10865,7 @@ body:before {
 
 @media (pointer: coarse) and (hover: none) {
   body {
-    background: url("../assets/img/bg-mobile-fallback.jpg") #2a5555 no-repeat center center scroll;
+    background: url("../assets/img/bg-mobile.jpg") #2a5555 no-repeat center center scroll;
     background-size: cover;
   }
   body video {
