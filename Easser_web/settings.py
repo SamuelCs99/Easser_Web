@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Easser_web.wsgi.application'
+WSGI_APPLICATION = 'Easser_web.wsgi.app'
 
 
 # Database
