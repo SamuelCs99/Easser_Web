@@ -1,6 +1,7 @@
 from django.shortcuts import redirect,render
 from django.views import View
 from django.http import HttpResponse
+from django.http import JsonResponse
 from bs4 import BeautifulSoup
 import requests
 import mechanicalsoup
@@ -195,3 +196,16 @@ def getUpdate(request):
         return redirect('actualizar')  # Redirige de nuevo a la página de actualización
     else:
         return render(request, 'actualizar.html')
+
+
+
+#____AUTOCOMPLETE____
+
+def autocomplete_titulos(request):
+    if 'term' in request.GET:
+        term = request.GET.get('term')
+        series = Series.objects.filter(serie__icontains=term)[:10]  # Usamos el campo 'serie'
+        resultados = [{'id': serie.id_serie, 'label': serie.serie, 'url': serie.url} for serie in series]
+        return JsonResponse(resultados, safe=False)
+    else:
+        return JsonResponse({'results': []}, safe=False)

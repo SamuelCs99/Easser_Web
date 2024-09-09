@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
         <link href='{% static "css/styles.css" %}' rel="stylesheet" />
     </head>
     <body>
@@ -33,7 +34,7 @@
                             {% csrf_token %}
                             <div class="col">
                                 <label for="url"></label>
-                                <input class="form-control" type="text" name="url" id="url" placeholder="Nombre de la serie o link..." aria-label="Nombre de la serie o link..." required/>
+                                <input class="form-control" type="text" name="url" id="url" placeholder="Nombre de la serie..." aria-label="Nombre de la serie o link..." required/>
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-primary" id="submitButton" type="submit">Buscar</button>
@@ -62,6 +63,7 @@
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 </html>
