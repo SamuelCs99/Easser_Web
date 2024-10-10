@@ -28,7 +28,7 @@
                     <h1 class="fst-italic lh-1 mb-4">Easser</h1>
                     <p class="mb-5">Encuentra la serie que buscas y descargala facil y rapido!</p>
                     
-                    <form id="series-form" data-url="{% url 'series' %}" method="post">
+                    <div id="series-form" data-url="{% url 'series' %}" method="GET">
                         <!-- Email address input-->
                         <div class="row input-group-newsletter">
                             {% csrf_token %}
@@ -40,7 +40,16 @@
                                 <button class="btn btn-primary" id="submitButton" type="submit">Buscar</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <div id="myModal" class="modall">
+                        <div class="modall-content">
+                            <div>
+                            <span id="btn-close" class="close">&times;</span>
+                            <h4 class="modal-title" id="titleModalLabel">Resultados de la búsqueda:</h4>
+                            </div>
+                            <div id="suggestionResults" class="modall-body"></div>
+                        </div>
+                    </div>
                     <div id="loader" class="pre-loader">
                         <div class="loader">
                             <span class="bar"></span>

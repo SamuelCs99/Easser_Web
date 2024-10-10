@@ -13,6 +13,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
+def home(request):
+    return render(request, 'series_form.html')
 
 # Constantes para los nombres de idioma
 LANGUAGES = {
@@ -50,10 +52,10 @@ def fetch_episode_info(browser, href):
         return []
 
 def series(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
 
         # Obtener la URL proporcionada por el usuario
-        url = request.POST.get('url', '')
+        url = request.GET.get('url', '')
 
         # Crear una instancia del navegador MechanicalSoup
         browser = mechanicalsoup.StatefulBrowser()
@@ -107,7 +109,7 @@ def series(request):
             print(f"Error al procesar la solicitud: {str(e)}")
             return HttpResponse('Error en la solicitud')
     
-    return render(request, 'series_form.html')
+    
 
 #____ UPDATE DB ____
 
