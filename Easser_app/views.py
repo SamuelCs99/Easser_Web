@@ -42,6 +42,8 @@ def fetch_episode_info(browser, href):
                     lang_img_src = episode_lang.find('img')['src'][-6:-4]
                     language = LANGUAGES.get(lang_img_src, lang_img_src)
                     episode_info.append({'idioma': language, 'link': reproducir_url})
+            if episode_info == []:
+                episode_info.append('Este capitulo no esta subido a gamovideo')
         else:
             episode_info.append('Error al obtener informacion del capitulo')
         
@@ -206,8 +208,70 @@ def getUpdate(request):
 def autocomplete_titulos(request):
     if 'term' in request.GET:
         term = request.GET.get('term')
-        series = Series.objects.filter(serie__icontains=term)[:10]  # Usamos el campo 'serie'
+        series = Series.objects.filter(serie__icontains=term)[:10]
         resultados = [{'id': serie.id_serie, 'label': serie.serie, 'url': serie.url} for serie in series]
-        return JsonResponse(resultados, safe=False)
+        if resultados == []:
+            return JsonResponse([{'label': "No Hay Coincidencias"}], safe=False)
+        else:
+            return JsonResponse(resultados, safe=False)
     else:
         return JsonResponse({'results': []}, safe=False)
+
+#____MANIN 2____
+    
+def forEachEpisode(request):
+    if request.method == 'GET':
+
+        # Obtener la URL proporcionada por el usuario
+        url = request.GET.get('url', '')
+
+        # Crear una instancia del navegador MechanicalSoup
+        browser = mechanicalsoup.StatefulBrowser()
+
+        try:
+            # Realizar la solicitud HTTP y obtener el contenido de la página
+            response = browser.open(url)
+
+            # Verificar el código de estado de la respuesta
+            if response.status_code == 200:
+                # Obtener el contenido HTML de la página
+                soup = browser.get_current_page()
+                
+                 # Obtener el título de la página principal
+                title = soup.title.string
+                
+                #Obtener solo el menu
+                ul_menu = soup.select_one('ul.menu')
+
+                # Definir las clases que queremos mantener
+                clases_deseadas = ['season_title', 'episode-title-chapter', 'episode-title']
+
+                # Filtrar etiquetas <tr> y eliminar las hijas directas que no tengan las clases deseadas
+                for tr in ul_menu.find_all('tr'):
+                    for child in tr.children:
+                        if child.name and not any(clase in child.get('class', []) for clase in clases_deseadas):
+                            child.decompose()
+                
+                # Reemplazar target="_blank" con onclick="vdLink(this.href)" en etiquetas <a>
+                for a in ul_menu.find_all('a', target='_blank'):
+                    a['onclick'] = 'event.preventDefault(); vdLink(this)'
+                    del a['target']
+
+                
+                menu_html = render_to_string('episodesMenu.html', {'title': title[0:-16], 'results': ul_menu.prettify()})
+                return HttpResponse(menu_html)
+            else:
+                return HttpResponse('Error al obtener la página web')
+        except Exception as e:
+            # Manejo de excepciones en caso de error
+            print(f"Error al procesar la solicitud: {str(e)}")
+            return HttpResponse('Error en la solicitud')
+
+
+def episode(request):
+    href = request.GET.get('href')
+    browser = mechanicalsoup.StatefulBrowser()
+    episode_info = fetch_episode_info(browser, href)
+    episode_html = render_to_string('episode.html', {'results': episode_info})
+    return HttpResponse(episode_html)
+    

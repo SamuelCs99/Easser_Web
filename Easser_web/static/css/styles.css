@@ -11028,6 +11028,12 @@ body:before {
   height: auto;
   display: none;
 }
+
+.pre-loaderDym {
+  @extend .pre-loader;
+  display: block;
+}
+
 .loader {
   margin-block: 10px;
   position: relative;
@@ -11136,4 +11142,55 @@ body:before {
 
 .close:hover{
   color: #ccc;
+}
+
+.sideTG{
+  float: right;
+  padding-right: 125px;
+  padding-top: 5px;
+}
+
+.episodes {
+  margin-left: 1em;
+}
+
+.hidden {
+  display: none;
+}
+
+.expand {
+  display: flex;
+  flex-direction: column;
+}
+
+.season {
+  display:flex;
+}
+
+.season_title{
+  width: auto;
+  flex-shrink: 0;
+  transition: all ease 0.2s;
+}
+
+.season_title:hover {
+  cursor: pointer;
+  color: #2a5555;
+  transform: scale(1.05);
+}
+
+tr td a{
+  font-size: 1.2rem
+}
+
+.no-results {
+  color: lightgray;
+  font-style: italic;
+  text-align: center;
+  cursor: default;
+  transition-delay: 0.5s;
+}
+
+.no-results:hover {  
+  color: lightgray;
 }

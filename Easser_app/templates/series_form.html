@@ -26,9 +26,9 @@
             <div class="masthead-content text-white">
                 <div class="container-form px-4 px-lg-0">
                     <h1 class="fst-italic lh-1 mb-4">Easser</h1>
-                    <p class="mb-5">Encuentra la serie que buscas y descargala facil y rapido!</p>
+                    <p class="mb-5">Encuentra la serie que buscas subida a GAMOVIDEO</p>
                     
-                    <div id="series-form" data-url="{% url 'series' %}" method="GET">
+                    <div id="series-form" data-url="forEachEpisode" method="GET">
                         <!-- Email address input-->
                         <div class="row input-group-newsletter">
                             {% csrf_token %}
@@ -40,6 +40,10 @@
                                 <button class="btn btn-primary" id="submitButton" type="submit">Buscar</button>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-check form-switch sideTG" title="Este proceso puede demorar más">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault"> All </label>
                     </div>
                     <div id="myModal" class="modall">
                         <div class="modall-content">

@@ -1,0 +1,12 @@
+<ul>
+{% for info in results %}
+    {% if info == 'Este capitulo no esta subido a gamovideo' %}
+        <li>{{ info }}</li>
+    {% else %}
+        <li>
+            <p>Idioma: {{ info.idioma }}</p>
+            <p>URL: <a href="{{ info.link }}" target="_blank">{{ info.link }}</a></p>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>

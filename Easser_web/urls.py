@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Easser_app.views import series, getUpdate, autocomplete_titulos, home
+from Easser_app.views import series, getUpdate, autocomplete_titulos, home, forEachEpisode, episode
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('series', series, name='series'),
+    path('forEachEpisode', forEachEpisode, name='forEachEpisode'),
+    path('episode/', episode, name='episode'),
     path('actualizar/', getUpdate, name='actualizar'),
     path('autocomplete/', autocomplete_titulos, name='autocomplete_titulos'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
