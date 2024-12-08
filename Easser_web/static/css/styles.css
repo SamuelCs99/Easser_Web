@@ -10849,7 +10849,7 @@ body:before {
 }
 
 .bg-image {
-  background-image: url("../assets/img/bg.png");
+  background: url("../assets/img/bg.png");
   background-size: cover;
   background-position: center;
   position: fixed;
@@ -10864,7 +10864,7 @@ body:before {
 }
 
 @media (pointer: coarse) and (hover: none) {
-  body {
+  .bg-image {
     background: url("../assets/img/bg-mobile.jpg") #2a5555 no-repeat center center scroll;
     background-size: cover;
   }
@@ -10879,6 +10879,8 @@ body:before {
   display: flex;
   align-items: top;
   justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 .masthead:before {
   content: "";
@@ -10890,6 +10892,8 @@ body:before {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.85);
+  transform: translateY(370px) skewY(-9deg);
+  transform-origin: top right;
 }
 .masthead .masthead-content {
   overflow: auto;
